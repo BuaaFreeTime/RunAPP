@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Pace calculator</string>
+    <string name="title_calculator">Calculator</string>
+    <string name="title_music">Music</string>
+    <string name="title_history">History</string>
+    <string name="title_tracker">Running</string>
+</resources>
