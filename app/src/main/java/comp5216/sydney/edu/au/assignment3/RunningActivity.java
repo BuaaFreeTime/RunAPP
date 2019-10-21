@@ -60,5 +60,6 @@ public class RunningActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mTextMessage.setText("So sad! I didn't implement this function!");
     }
 }
