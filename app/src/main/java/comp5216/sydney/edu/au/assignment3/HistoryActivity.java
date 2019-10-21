@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 by BuaaFreeTime
+ */
+
 package comp5216.sydney.edu.au.assignment3;
 
 import android.content.Intent;
@@ -21,18 +25,20 @@ import java.util.Comparator;
 import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
+// A activity to implement the history record function
 
-
-    private ListView historyListView;
-    private ArrayList<HistoryRecord> records;
-    private ArrayAdapter<HistoryRecord> recordArrayAdapter;
-    private HistoryRecordDB db;
-    private HistoryRecordDao recordDao;
-    private TextView distanceAVG;
+    // Define variables
+    private ListView historyListView;                           // Listview to show history
+    private ArrayList<HistoryRecord> records;                   // Lists of history
+    private ArrayAdapter<HistoryRecord> recordArrayAdapter;     // A adapter of listview
+    private HistoryRecordDB db;                                 // database
+    private HistoryRecordDao recordDao;                         // database interface
+    private TextView distanceAVG;                               // textview of AVG things
     private TextView timeAVG;
     private TextView paceAVG;
     private TextView speedAVG;
 
+    // the BottomNavigation
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -80,9 +86,11 @@ public class HistoryActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_history);
 
+        // BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        // AVG things
         distanceAVG = (TextView) findViewById(R.id.textViewDistanceAVG);
         timeAVG = (TextView) findViewById(R.id.textViewTimeAVG);
         paceAVG = (TextView) findViewById(R.id.textViewPaceAVG);
@@ -97,6 +105,8 @@ public class HistoryActivity extends AppCompatActivity {
         db = HistoryRecordDB.getDatabase(this.getApplication().getApplicationContext());
         recordDao = db.historyRecordDao();
         readItemsFromDatabase();
+
+        // Add some data
         addSomeData();
 
         // Sort by date
@@ -114,6 +124,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
+    // Random Add some data
     public void addSomeData(){
         records.add(new HistoryRecord(66, 50, "10-01-1995 00:00:00"));
         records.add(new HistoryRecord(100, 100, "10-02-1995 00:00:00"));
@@ -134,11 +145,14 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
+    // calculate the weekly AVG data
     public void calculateWeeklyAVG(){
+        // the next four is the final answer
         double distance = 0;
         double time = 0;
         double pace = 0;
         double speed = 0;
+        // the next Six is used in calculate weekly data
         double nowDistance = 0;
         double nowTime = 0;
         double nowPace = 0;
@@ -146,24 +160,28 @@ public class HistoryActivity extends AppCompatActivity {
         int lastYear;
         int lastWeek ;
         int num = 0;
+        // Total week amount
         int numWeek = 0;
+        // get the first data
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(records.get(0).getFormatDate());
         lastWeek = calendar.get(Calendar.WEEK_OF_YEAR);
         lastYear = calendar.get(Calendar.YEAR);
+        //calculate the weekly AVG data
         for (HistoryRecord item : records){
             Calendar cal = Calendar.getInstance();
             cal.setTime(item.getFormatDate());
             int week = cal.get(Calendar.WEEK_OF_YEAR);
             int year = cal.get(Calendar.YEAR);
+            // in same week
             if ((year == lastYear) && (week == lastWeek)) {
                 num++;
-                System.out.println(num);
                 nowDistance += item.getDistance();
                 nowTime += item.getTime();
                 nowPace += item.getPace();
                 nowSpeed += item.getSpeed();
             }
+            // in difference week
             else if (num > 0) {
                 numWeek++;
                 lastWeek = week;
@@ -179,7 +197,7 @@ public class HistoryActivity extends AppCompatActivity {
                 nowSpeed = 0;
             }
         }
-        System.out.println(numWeek);
+        // calculate the final data
         if (numWeek > 0) {
             distance = distance / (double) numWeek;
             time = time / (double) numWeek;
@@ -195,14 +213,16 @@ public class HistoryActivity extends AppCompatActivity {
         time = Math.round(time * 100.0) / 100.0;
         pace = Math.round(pace * 100.0) / 100.0;
         speed = Math.round(speed * 100.0) / 100.0;
+        // output
         distanceAVG.setText("Weekly DistanceAVG : " + distance + " km");
         timeAVG.setText("Weekly TimeAVG : " + time + " min");
         paceAVG.setText("Weekly PaceAVG : " + pace + " min/km");
         speedAVG.setText("Weekly SpeedAVG : " + speed + " km/hour");
     }
 
+    // A method to sort records by date
     public void sortByDate() {
-        // A method to sort records by date
+
         Collections.sort(records, new Comparator<HistoryRecord>() {
 
             @Override
@@ -214,6 +234,7 @@ public class HistoryActivity extends AppCompatActivity {
         });
     }
 
+    // read data from database
     private void readItemsFromDatabase() {
         //Use asynchronous task to run query on the background and wait for result
         try {

@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 by BuaaFreeTime
+ */
+
 package comp5216.sydney.edu.au.assignment3;
 
 import android.Manifest;
@@ -14,7 +18,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,14 +33,15 @@ public class MusicActivity extends AppCompatActivity {
     //requestCode
     private final static int STORGE_REQUEST = 1 ;
 
-    private TextView mTextMessage;
-    private ListView musicListView;
-    private ArrayList<MusicInfo> musicInfos;
-    private ArrayAdapter<MusicInfo> musicAdapter;
+    // define
+    private ListView musicListView;                         // ListView of all music
+    private ArrayList<MusicInfo> musicInfos;                // List to save the data
+    private ArrayAdapter<MusicInfo> musicAdapter;           //  A adapter
 
-    private MediaPlayer mPlayer = null;
-    private boolean isRelease = true;
+    private MediaPlayer mPlayer = null;                     // music player
+    private boolean isRelease = true;                       // the player working or not
 
+    // Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -142,6 +146,7 @@ public class MusicActivity extends AppCompatActivity {
         mPlayer = new MediaPlayer();
     }
 
+
     private void setupListViewListener() {
         // Short click to play music
         musicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -172,6 +177,7 @@ public class MusicActivity extends AppCompatActivity {
         });
     }
 
+    // stop button
     public void onClick(View view) {
         if (!isRelease) {
             mPlayer.stop();

@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 by BuaaFreeTime
+ */
+
 package comp5216.sydney.edu.au.assignment3;
 
 import android.content.Context;
@@ -5,7 +9,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-
+// database
 @Database(entities = {HistoryRecordDF.class}, version = 1, exportSchema = false)
 public abstract class HistoryRecordDB extends RoomDatabase {
 

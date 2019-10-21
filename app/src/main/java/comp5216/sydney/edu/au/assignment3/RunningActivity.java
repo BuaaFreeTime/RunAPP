@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 by BuaaFreeTime
+ */
+
 package comp5216.sydney.edu.au.assignment3;
 
 import android.content.Intent;
@@ -10,9 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+// Running tracker class
 public class RunningActivity extends AppCompatActivity {
     private TextView mTextMessage;
 
+    // Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 

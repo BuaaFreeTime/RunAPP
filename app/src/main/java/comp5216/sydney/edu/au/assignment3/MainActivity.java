@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 by BuaaFreeTime
+ */
+
 package comp5216.sydney.edu.au.assignment3;
 
 import android.content.Intent;
@@ -13,14 +17,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
+// this is the main activity also is the calculator activity
 public class MainActivity extends AppCompatActivity {
-    // this is the main activity also is the calculator activity
 
-    private TextView textViewPace;
-    private TextView textViewSpeed;
-    private EditText editDistance;
-    private EditText editTime;
+    // define
+    private TextView textViewPace;                // textview of pace
+    private TextView textViewSpeed;               // textview of speed
+    private EditText editDistance;                // input distance
+    private EditText editTime;                    // input time
 
+    // Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -78,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         editTime = (EditText)findViewById(R.id.etEditTime);
         double distance = Double.valueOf(editDistance.getText().toString());
         double time = Double.valueOf(editTime.getText().toString());
+        // calculate the pace and speed
         textViewPace.setText("Pace: "
                 + String.valueOf(Math.round(time / distance * 100.0) / 100.0)
                 + " min/km");
@@ -86,10 +94,4 @@ public class MainActivity extends AppCompatActivity {
                 + " km/hour");
     }
 
-    @Override
-    public void onBackPressed() {
-        // your code
-        this.finish();
-        return;
-    }
 }

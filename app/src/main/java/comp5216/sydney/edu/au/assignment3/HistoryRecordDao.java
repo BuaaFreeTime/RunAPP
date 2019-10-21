@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 by BuaaFreeTime
+ */
+
 package comp5216.sydney.edu.au.assignment3;
 
 import androidx.room.Dao;
@@ -8,6 +12,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
+// database interface
 @Dao
 public interface HistoryRecordDao {
 

@@ -1,18 +1,23 @@
+/*
+ * Copyright 2019 by BuaaFreeTime
+ */
+
 package comp5216.sydney.edu.au.assignment3;
 
 import android.net.Uri;
 
 import java.io.Serializable;
 
+// A entity class of music file
 public class MusicInfo implements Serializable {
 
-    private  int _id = - 1;       // 音乐标识码
+    private  int _id = - 1;
     private  int durationMin = -1 ;   // Music min duration
     private  int durationSec = -1 ;   // Music sec duration
-    private String musicName= null ; //音乐名字
-    private int size  ;   //音乐文件的大小  返回byte大小
-    private String data ;  //获取文件的完整路径
-    private Uri uri;
+    private String musicName= null ;  //  the name of the music
+    private int size  ;               // the size of the file
+    private String data ;             // the path of the file
+    private Uri uri;                  // file's uri
 
 
     public void setData(String data) {

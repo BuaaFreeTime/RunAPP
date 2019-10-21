@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 by BuaaFreeTime
+ */
+
 package comp5216.sydney.edu.au.assignment3;
 
 
@@ -10,8 +14,10 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "historyrecord", indices = {@Index("historyRecordID")})
 
+
+// A database entity class
 public class HistoryRecordDF {
-    // A database form class
+
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
